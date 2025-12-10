@@ -1,0 +1,23 @@
+# ---- Environment Variables ----
+.env
+
+# ---- Virtual Environments ----
+venv/
+.env/
+
+# ---- Python Cache ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ---- IDE Files ----
+.vscode/
+.idea/
+
+# ---- Logs ----
+*.log
+
+# ---- OS Generated Files ----
+.DS_Store
+Thumbs.db
