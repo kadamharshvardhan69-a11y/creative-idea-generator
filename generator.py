@@ -16,3 +16,5 @@ def generate_idea(topic: str) -> str:
     prompt = f"Generate a creative one sentance idea based on this topic: {topic}"
     response = model.generate_content(prompt)
     return response.text.strip()
+
+
