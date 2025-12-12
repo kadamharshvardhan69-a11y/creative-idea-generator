@@ -13,6 +13,6 @@ genai.configure(api_key=api_key)
 
 def generate_idea(topic: str) -> str:
     model = genai.GenerativeModel("models/gemini-2.5-flash")
-    prompt = f"Generate a creative one sentance idea based on this topic: {topic}"
+    prompt = f"Generate a creative one sentance idea based on this topic : {topic} should be simple to  understand and should be display either in table format avoid fluff words."
     response = model.generate_content(prompt)
     return response.text.strip()

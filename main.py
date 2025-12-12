@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify, render_template
 from generator import generate_idea
 from flask_cors import CORS
+from db import get_cached_idea, set_cached_idea
+
+#Flask Server Setup
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 CORS(app)
@@ -18,7 +21,14 @@ def create_idea():
         if not topic:
             return jsonify({"error": "Topic is required"}), 400
 
+        # Check cache first
+        cached_idea = get_cached_idea(topic)
+        if cached_idea:
+            return jsonify({"idea": cached_idea})
+
+        # Generate new idea if not cached
         idea = generate_idea(topic)
+        set_cached_idea(topic, idea)
         return jsonify({"idea": idea})
     except Exception as e:
         print(f"Error generating idea: {str(e)}")
