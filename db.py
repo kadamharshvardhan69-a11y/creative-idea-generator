@@ -2,11 +2,18 @@ from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 
+# Load environment variables from .env file
 load_dotenv()
-
+# Get MongoDB connection URI from environment; fallback to local MongoDB if not set
 mongo_uri = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
+# Create a MongoDB client instance
 client = MongoClient(mongo_uri)
+
+
+# Select the database for storing cached ideas
 db = client["creative_idea_generator"]
+
+# Select the collection where ideas will be stored
 ideas_collection = db["ideas"]
 
 def get_cached_idea(topic: str) -> str:
