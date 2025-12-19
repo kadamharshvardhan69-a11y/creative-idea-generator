@@ -72,7 +72,7 @@ async function generateIdea() {
     try {
         const response = await new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://127.0.0.1:5000/generate", true);
+            xhr.open("POST", "http://127.0.0.1:8000/generate", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
