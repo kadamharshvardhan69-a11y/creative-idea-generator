@@ -9,6 +9,7 @@ import json
 #load_dotenv()
 
 # Retrieve the Gemini API key from the environment
+# Retrieve the Gemini API key from the environment
 api_key = os.getenv("GEMINI_API_KEY")
 
 # If the key is missing, raise an error immediately
