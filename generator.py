@@ -72,6 +72,7 @@ Be specific, practical, and insightful.
     )
     
     # Parse and return the JSON response
+    #Json response
     
     result = json.loads(response.text)
     return result
