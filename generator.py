@@ -8,13 +8,15 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 
 # Load the environment variables from the .env file into the system environment
-load_dotenv()
+#load_dotenv()
 
+# Retrieve the Gemini API key from the environment
 # Retrieve the Gemini API key from the environment
 api_key = os.getenv("GEMINI_API_KEY")
 
 # If the key is missing, raise an error immediately
 if not api_key:
+    print("CRITICAL ERROR: GEMINI_API_KEY is empty in the environment!")
     raise ValueError("GEMINI_API_KEY not found in .env")
 
 # Configure the Gemini API using the retrieved key
@@ -91,6 +93,7 @@ Be specific, practical, and insightful.
     )
     
     # Parse and return the JSON response
+    #Json response
     
     result = json.loads(response.text)
     return result

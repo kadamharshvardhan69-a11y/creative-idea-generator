@@ -1,0 +1,10 @@
+/* You can add extra custom styling here */
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+#result {
+    transition: all 0.3s ease-in-out;
+}
+

@@ -7,9 +7,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-ENV FLASK_APP=app.py
-ENV FLASK_ENV=production
+ENV FLASK_APP=main.py
+ENV PORT=8000
 
-EXPOSE 8000 # Needs editing the port number
+EXPOSE 8000 
 
-CMD ["gunicorn", "-b", "0.0.0.0:8000", "app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:8000", "main:app"]
