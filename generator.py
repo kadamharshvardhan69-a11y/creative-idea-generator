@@ -4,6 +4,8 @@ import google.generativeai as genai
 from typing import TypedDict
 from typing_extensions import NotRequired
 import json
+from google.oauth2 import id_token
+from google.auth.transport import requests
 
 # Load the environment variables from the .env file into the system environment
 load_dotenv()
@@ -17,6 +19,24 @@ if not api_key:
 
 # Configure the Gemini API using the retrieved key
 genai.configure(api_key=api_key)
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+
+def verify_google_token(token: str):
+    try:
+        idinfo = id_token.verify_oauth2_token(
+            token,
+            requests.Request(),
+            GOOGLE_CLIENT_ID
+        )
+
+        return {
+            "email": idinfo.get("email"),
+            "name": idinfo.get("name"),
+            "picture": idinfo.get("picture")
+        }
+
+    except Exception:
+        return None
 
 def generate_idea(topic: str):
 

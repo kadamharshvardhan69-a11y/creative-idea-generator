@@ -17,3 +17,13 @@ if api_key:
 else:
         # If not found, notify that the key didn't load properly
     print("GEMINI_API_KEY is NOT loading — check .env file location and variable name.")
+    
+# Fetch the value of GOOGLE_CLIENT_ID stored in the .env file
+
+google_client_id = os.getenv("GOOGLE_CLIENT_ID")
+
+if google_client_id:
+    # Print only first 10 characters for security
+    print("GOOGLE CLIENT ID loaded:", google_client_id[:10] + "*****")
+else:
+    print("❌ GOOGLE_CLIENT_ID is NOT loading — check .env file")

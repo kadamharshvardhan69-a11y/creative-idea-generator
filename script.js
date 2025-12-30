@@ -51,6 +51,13 @@ function safeDisplayText(element, text) {
     element.textContent = text;
 }
 
+    // ❌ Block request if user is not logged in
+    if (!googleUserToken) {
+        alert("Please login with Google first!");
+        return;
+    }
+
+
 async function generateIdea() {
     const topicInput = document.getElementById("topicInput");
     const topic = topicInput.value;
@@ -74,16 +81,25 @@ async function generateIdea() {
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "http://127.0.0.1:5000/generate", true);
             xhr.setRequestHeader("Content-Type", "application/json");
+            
+            // 🔐 Send Google ID Token to backend
+            xhr.setRequestHeader(
+                "Authorization",
+                "Bearer " + googleUserToken
+            );
+
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         resolve(JSON.parse(xhr.responseText));
+                    } else if (xhr.status === 401){
+                        reject(new Error("Unauthorized: Please login with Google."));
                     } else {
                         reject(new Error("Server error or invalid request"));
                     }
                 }
             };
-            xhr.send(JSON.stringify({ topic: validation.value }));
+            xhr.send(JSON.stringify({ topic: validation.value }));  
         });
 
         // --- NEW JSON PARSING BLOCK START ---
@@ -142,3 +158,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+// Google Login Handling
+let googleUserToken = null;
+
+function handleGoogleLogin(response) {
+    googleUserToken = response.credential;
+
+    document.getElementById("loginStatus").textContent =
+        "✅ Logged in with Google";
+
+    console.log("Google ID Token:", googleUserToken);
+}
