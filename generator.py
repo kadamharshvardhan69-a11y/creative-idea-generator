@@ -8,7 +8,7 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 
 # Load the environment variables from the .env file into the system environment
-#load_dotenv()
+load_dotenv()
 
 # Retrieve the Gemini API key from the environment
 # Retrieve the Gemini API key from the environment

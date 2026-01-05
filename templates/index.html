@@ -12,6 +12,7 @@
         rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 
 <body class="bg-gray-100">
@@ -25,6 +26,12 @@
         <p class="text-gray-600 text-center mb-6">
             Enter a topic and generate a creative one-sentence idea instantly.
         </p>
+
+        <!-- Google Login -->
+          <div id="g_id_onload"
+            data-client_id="123456789012-abcxyz.apps.googleusercontent.com"
+            data-callback="handleGoogleLogin">
+        </div>
 
         <!-- Input Label -->
         <label class="block text-gray-800 font-semibold mb-2">Enter Topic:</label>
